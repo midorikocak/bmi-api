@@ -10,7 +10,8 @@ form {
   margin: 0 auto;
 }
 
-button {
+.button {
+  display: block;
   margin-top: 2rem;
 }
 

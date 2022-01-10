@@ -7,7 +7,7 @@ let resultText = document.getElementById('Result');
 
 function bmiCalculation(weight, height) {
 
-  resultText.innerHTML = (weight / height / height) * 10000;
+  resultText.innerHTML = ((weight / height / height) * 10000).toFixed(2);
   return;
 }
 
