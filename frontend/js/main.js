@@ -6,13 +6,11 @@ let sendButton = document.getElementById('Send');
 let resultText = document.getElementById('Result');
 
 function bmiCalculation(weight, height) {
-
-  resultText.innerHTML = ((weight / height / height) * 10000).toFixed(2);
-  return;
+  return ((weight / height / height) * 10000).toFixed(2)
 }
 
 sendButton.addEventListener('click', function() {
-  bmiCalculation(weightInput.value, heightInput.value);
+  resultText.innerHTML = bmiCalculation(weightInput.value, heightInput.value);
 });
 
 //bmiCalculation(weightInput, heightInput);
