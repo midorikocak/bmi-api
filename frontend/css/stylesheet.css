@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+}
+form {
+    width: 400px;
+    margin: 20px auto;
+}
+
+form ul {
+    list-style-type: none;
+}
+
+form li {
+    margin-bottom: 15px;
+}
+
+#result {
+    width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 30px;
+}
