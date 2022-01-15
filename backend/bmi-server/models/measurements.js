@@ -12,7 +12,7 @@ function add(data, callback) {
 
 function all(callback) {
   const sql = "SELECT * FROM measurements";
-  db.all();
+  db.all(sql, callback);
 }
 
 function one(id, callback) {
