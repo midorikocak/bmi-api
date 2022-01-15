@@ -1,5 +1,5 @@
 const sqlite3 = require("sqlite3");
-const db = new sqlite3.Database("./data/database.db");
+const db = new sqlite3.Database("../data/database.db");
 
 function add(data, callback) {
   const sql =
@@ -9,7 +9,7 @@ function add(data, callback) {
 
 function all(callback) {
   const sql = "SELECT * FROM measurements";
-  db.all();
+  db.all(sql, callback);
 }
 
 function one(id, callback) {
