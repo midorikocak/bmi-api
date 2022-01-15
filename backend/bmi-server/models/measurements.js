@@ -13,7 +13,7 @@ function all(callback) {
 }
 
 function one(id, callback) {
-    const sql = "SELECT*FROM measurements WHERE id=?";
+    const sql = "SELECT*FROM measurements WHERE id=1";
     db.get();
 }
 
