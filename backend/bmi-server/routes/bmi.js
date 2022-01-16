@@ -9,10 +9,10 @@ router.post("/", function (req, res, next) {
   let weight = req.body.weight;
   let height = req.body.height;
   let bmi = ((weight / height / height) * 10000).toFixed(2);
-  let dateTime = new Date().toLocaleString();
-  console.log(dateTime);
+  let datetime = new Date().toLocaleString();
+  console.log(datetime);
 
-  let responseObject = { bmi: bmi, dateTime: dateTime };
+  let responseObject = { bmi: bmi, datetime: datetime };
 
   res.json(responseObject);
 });

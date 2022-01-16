@@ -4,24 +4,19 @@ var Measurements = require("../models/measurements");
 
 /*CREATE  MARGAAA*/
 router.post("/", function (req, res, next) {
-  console.log(req.body);
-
   let weight = req.body.weight;
   let height = req.body.height;
   let bmi = ((weight / height / height) * 10000).toFixed(2);
-  let dateTime = new Date().toLocaleString();
-  console.log(dateTime);
+  let datetime = new Date().toLocaleString();
 
-  let responseObject = { bmi: bmi, dateTime: dateTime };
-  Measurements.add(responseObject, function (err, data) {
+  let responseObject = { bmi: bmi, datetime: datetime };
+  Measurements.add(responseObject, function (err) {
     if (err) {
       res.status(500).send("Server error");
     } else {
       res.json(responseObject);
     }
   });
-
-  res.json(responseObject);
 });
 
 /*ALL (read) MARGAAA*/
@@ -55,21 +50,22 @@ router.put("/:id", function (req, res, next) {
   let height = req.body.height;
 
   let bmi = ((weight / height / height) * 10000).toFixed(2);
-  let dateTime = new Date().toLocaleString();
+  let datetime = new Date().toLocaleString();
 
-  let newData = { bmi: bmi, dateTime: dateTime };
+  let newData = { bmi: bmi, datetime: datetime };
 
   Measurements.update(id, newData, function (err) {
     if (err) {
       res.status(500).send("Server error");
     } else {
-      res.status(200).send();
+      res.json(newData);
     }
   });
 });
 
 /*DELETE MARGAAA*/
 router.delete("/:id", function (req, res, next) {
+  const id = parseInt(req.params.id);
   Measurements.remove(id, function (err) {
     if (err) {
       res.status(500).send("Server error");
