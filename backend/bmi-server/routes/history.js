@@ -1,85 +1,84 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var Measurements = require('../models/measurements');
+var Measurements = require("../models/measurements");
 
-/* create */
-router.post('/', function(req, res, next) {
-    console.log(req.body)
+/* Create */
+router.post("/", function (req, res, next) {
+  let weight = req.body.weight;
+  let height = req.body.height;
 
-    let weight = req.body.weight;
-    let height = req.body.height;
+  let bmi = ((weight / height / height) * 10000).toFixed(2);
+  let datetime = new Date().toLocaleString();
 
-    let bmi = ((weight / height / height) * 10000).toFixed(2);
-    let dateTime = (new Date()).toLocaleString();
-    
-    let responseObject = {bmi : bmi, dateTime: dateTime};
-    
-    Measurements.add(responseObject, function (err) {
-        if (err) {
-            res.status(500).send("Server error");
-        } else {
-            res.json(responseObject);
-        }
-    });
-  
+  let responseObject = { bmi: bmi, datetime: datetime };
+
+  Measurements.add(responseObject, function (err) {
+    if (err) {
+      res.status(500).send("Server Error");
+    } else {
+      res.json(responseObject);
+    }
+  });
 });
 
-/* all */
-router.get('/', function(req, res, next) {
-    Measurements.all(function (err, data) {
-        if (err) {
-            res.status(500).send("Server error");
-        } else {
-            res.json(data);
-        }
-    });
+/* All */
+
+router.get("/", function (req, res, next) {
+  Measurements.all(function (err, data) {
+    if (err) {
+      res.status(500).send("Server Error");
+    } else {
+      res.json(data);
+    }
+  });
 });
 
-/* one */
-router.get('/:id', function(req, res, next) {
-    const id = parseInt(req.params.id);
-    Measurements.one(id, function (err, data) {
-        if (err) {
-            res.status(500).send("Server error");
-        } else {
-            res.json(data);
-        }
-    });
+/* One */
+
+router.get("/:id", function (req, res, next) {
+  const id = parseInt(req.params.id);
+  Measurements.one(id, function (err, data) {
+    if (err) {
+      res.status(500).send("Server Error");
+    } else {
+      res.json(data);
+    }
+  });
 });
 
-/* update */
-router.put('/:id', function(req, res, next) {
-    const id = parseInt(req.params.id);
+/* Update */
+router.put("/:id", function (req, res, next) {
+  const id = parseInt(req.params.id);
 
-    let weight = req.body.weight;
-    let height = req.body.height;
+  let weight = req.body.weight;
+  let height = req.body.height;
 
-    let bmi = ((weight / height / height) * 10000).toFixed(2);
-    let dateTime = (new Date()).toLocaleString();
-    
-    let newData = {bmi : bmi, dateTime: dateTime};
-    
-    Measurements.update(id, newData, function (err, data) {
-        if (err) {
-            res.status(500).send("Server error");
-        } else {
-            res.status(200).send();
-        }
-    });
+  let bmi = ((weight / height / height) * 10000).toFixed(2);
+  let datetime = new Date().toLocaleString();
+
+  let newData = { bmi: bmi, datetime: datetime };
+
+  Measurements.update(id, newData, function (err) {
+    if (err) {
+      res.status(500).send("Server Error");
+    } else {
+      res.json(newData);
+    }
+  });
 });
 
-/* delete */
-router.delete('/:id', function(req, res, next) {
-    const id = parseInt(req.params.id);
-    
-    Measurements.remove(id, function (err, data) {
-        if (err) {
-            res.status(500).send("Server error");
-        } else {
-            res.status(200).send();
-        }
-    });
-});
+/* Delete */
 
+router.delete("/:id", function (req, res, next) {
+  const id = parseInt(req.params.id);
+
+  Measurements.remove(id, function (err, data) {
+    if (err) {
+      res.status(500).send("Server Error");
+    } else {
+      res.status(200).send();
+    }
+  });
+});
 
 module.exports = router;
