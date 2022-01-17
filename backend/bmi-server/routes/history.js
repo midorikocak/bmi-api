@@ -5,7 +5,7 @@ var router = express.Router();
 
 //creates
 router.post("/", function (req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
 
   let weight = req.body.weight;
   let height = req.body.height;
@@ -37,6 +37,7 @@ router.get("/", function (req, res, next) {
 
 //One
 router.get("/:id", function (req, res, next) {
+  const id = parseInt(req.params.id);
   Measurements.one(id, function (err, data) {
     if (err) {
       res.status(500).send("There was an error");
@@ -69,7 +70,7 @@ router.put("/:id", function (req, res, next) {
 //Delete
 router.delete("/:id", function (req, res, next) {
   const id = parseInt(req.params.id);
-  Measurements.delete(id, function (err) {
+  Measurements.remove(id, function (err) {
     if (err) {
       res.status(500).send("There was an error");
     } else {
