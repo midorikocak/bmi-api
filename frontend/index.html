@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BMI calculator</title>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/marx/3.0.7/marx.min.css"
@@ -14,17 +15,20 @@
     />
   </head>
   <body>
-    <h1>BMI calculator</h1>
-    <label for="weightInput"> Weight</label>
-    <input type="number" id="weightInput" placeholder="Enter your weight" />
+    <main>
+      <h1>BMI Calculator</h1>
 
-    <label for="heightInput">Height</label>
-    <input type="number" id="heightInput" placeholder="Enter your height" />
+      <label for="weight">Weight (kg)</label>
+      <input id="weight" type="number" placeholder="Enter your weight" />
 
-    <button type="button" id="calculate">Calculate BMI</button>
+      <label for="height">Height (cm)</label>
+      <input id="height" type="number" placeholder="Enter your height" />
 
-    <h2>Result</h2>
-    <p id="result"></p>
-    <script src="js/main.js"></script>
+      <button id="calculate">Calculate</button>
+
+      <h2>Result</h2>
+      <p id="result">Result</p>
+    </main>
+    <script src="js/main.js" async defer></script>
   </body>
 </html>

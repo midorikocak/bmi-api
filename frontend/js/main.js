@@ -1,16 +1,35 @@
-//alert("Hello world!"); Anna :)
+// weight
+// height
+// result
+// calculate
 
-const heightInp = document.getElementById("heightInput");
-const weightInp = document.getElementById("weightInput");
-const calculateBtn = document.getElementById("calculate");
+let weightInput = document.getElementById("weight");
+let heightInput = document.getElementById("height");
+let resultsArea = document.getElementById("result");
+let resultButton = document.getElementById("calculate");
 
-let resultTxt = document.getElementById("result");
+// formula BMI (function)
 
-function calculateBmi(weight, height) {
-  return ((weight / height / height) * 10000).toFixed(2);
-}
+// function calculateBMI(height, weight) {
+//   return ((weight / height / height) * 10000).toFixed(2);
+// }
+//
 
-calculateBtn.addEventListener("click", function () {
-  console.log(weightInp.value, heightInp.value);
-  resultTxt.innerHTML = calculateBmi(weightInp.value, heightInp.value);
+// event listeners
+
+resultButton.addEventListener("click", function () {
+  let weight = weightInput.value;
+  let height = heightInput.value;
+  let requestData = { height: height, weight: weight };
+  fetch("http://127.0.0.1:3000/bmi", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => response.json())
+    .then(function (responseData) {
+      resultsArea.innerHTML = responseData.bmi;
+    });
 });

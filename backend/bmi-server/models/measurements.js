@@ -32,4 +32,9 @@ function stats(callback) {
   db.get(sql, callback);
 }
 
-module.exports = { add, one, all, update, remove, stats };
+function deleteAll(callback) {
+  const sql = "DELETE FROM measurements";
+  db.run(sql, callback);
+}
+
+module.exports = { add, one, all, update, remove, stats, deleteAll };
