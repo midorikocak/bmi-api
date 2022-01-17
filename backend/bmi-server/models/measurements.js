@@ -26,4 +26,10 @@ function remove(id, callback) {
   db.run(sql, id, callback);
 }
 
-module.exports = { add, one, all, update, remove };
+function stats(callback) {
+  const sql =
+    "SELECT AVG(bmi) AS 'averageBmi', COUNT(*) AS 'measurements' FROM measurements";
+  db.get(sql, callback);
+}
+
+module.exports = { add, one, all, update, remove, stats };
