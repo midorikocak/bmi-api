@@ -3,17 +3,21 @@ var router = express.Router();
 
 /* POST bmi page. */
 router.post('/', function(req, res, next) {
-  console.log(req.body);
+	let weight = req.body.weight;
+	let height = req.body.height;
 
-  let weight = req.body.weight;
-  let height = req.body.height;
+	let bmi = ((weight / height / height) * 10000).toFixed(2);
+	let date_time = new Date().toLocaleString();
 
-  let bmi = ((weight / height / height) * 10000).toFixed(2);
-  let dateTime = (new Date()).toLocaleString();
+	let responseObject = { bmi: bmi, date_time: date_time };
 
-  let responseObject = { bmi: bmi, dateTime: dateTime};
-
-  res.json(responseObject);
+	Measurements.add(responseObject, function (err) {
+		if (err) {
+      res.status(500).send("Server error");
+		} else {
+      res.json(responseObject);
+		}
+	});
 });
 
 module.exports = router;
