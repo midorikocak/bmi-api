@@ -1,22 +1,21 @@
 var express = require("express");
-var Measurements = require("../models/measurements");
 var router = express.Router();
+var Measurements = require("../models/measurements");
 
 /* create */
 router.post("/", function (req, res, next) {
-	console.log(req.body);
 
 	let weight = req.body.weight;
 	let height = req.body.height;
 
 	let bmi = ((weight / height / height) * 10000).toFixed(2);
-	let dateTime = new Date().toLocaleString();
+	let date_time = new Date().toLocaleString();
 
-	let responseObject = { bmi: bmi, dateTime: dateTime };
+	let responseObject = { bmi: bmi, date_time: date_time };
 
 	Measurements.add(responseObject, function (err) {
 		if (err) {
-      res.status(500).send("There was a server error");
+      res.status(500).send("Server error");
 		} else {
       res.json(responseObject);
 		}
@@ -54,9 +53,9 @@ router.put("/:id", function (req, res, next) {
 	let height = req.body.height;
 
 	let bmi = ((weight / height / height) * 10000).toFixed(2);
-	let dateTime = new Date().toLocaleString();
+	let date_time = new Date().toLocaleString();
 
-	let newData = { bmi: bmi, dateTime: dateTime };
+	let newData = { bmi: bmi, date_time: date_time };
   
   Measurements.update(id, newData, function (err) {
     if (err) {
