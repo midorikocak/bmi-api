@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var Measurements = require("../models/measurements");
 
 /* Create */
 router.post("/", function (req, res, next) {
@@ -19,5 +20,4 @@ router.post("/", function (req, res, next) {
     }
   });
 });
-
 module.exports = router;
