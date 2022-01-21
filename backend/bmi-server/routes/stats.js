@@ -7,7 +7,26 @@ router.get("/", function (req, res, next) {
     if (err) {
       res.status(500).send("Server Error");
     } else {
-      res.json(data);
+      res.format({
+        html: function () {
+          res.render("stats", {
+            measurements: data.measurements,
+            averageBmi: data.averageBmi,
+          });
+        },
+        json: function () {
+          res.json(data);
+        },
+        text: function () {
+          res.send(
+            "Measurements: " +
+              data.measurements +
+              " Average BMI: " +
+              data.averageBmi
+          );
+        },
+      });
+      // res.json(data);
     }
   });
 });

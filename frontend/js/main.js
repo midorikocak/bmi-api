@@ -1,16 +1,25 @@
-// alert("hello");
-
 let height = document.querySelector("#heightInput");
 let weight = document.querySelector("#weightInput");
 const button = document.querySelector("#calculateBtn");
 let resultArea = document.querySelector("#result");
 
-function calculateBMI(height, weight) {
-  return ((weight / height / height) * 10000).toFixed(2);
-}
-
 button.addEventListener("click", function (event) {
   let height = heightInput.value;
   let weight = weightInput.value;
-  resultArea.innerHTML = calculateBMI(height, weight);
+  let requestData = {
+    height: height,
+    weight: weight,
+  };
+  fetch("http://localhost:3000/bmi", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => response.json())
+    .then(function (responseData) {
+      console.log(responseData);
+      resultArea.innerHTML = responseData.bmi;
+    });
 });

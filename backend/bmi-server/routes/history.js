@@ -48,14 +48,21 @@ router.put("/:id", function (req, res, next) {
   });
 });
 
-/* Delete */
-
+router.delete("/all", function (req, res, next) {
+  Measurements.deleteAll(function (err) {
+    if (err) {
+      res.status(500).send("There was an error");
+    } else {
+      res.status(200).send();
+    }
+  });
+});
+//Delete
 router.delete("/:id", function (req, res, next) {
   const id = parseInt(req.params.id);
-
-  Measurements.remove(id, function (err, data) {
+  Measurements.remove(id, function (err) {
     if (err) {
-      res.status(500).send("Server Error");
+      res.status(500).send("There was an error");
     } else {
       res.status(200).send();
     }
